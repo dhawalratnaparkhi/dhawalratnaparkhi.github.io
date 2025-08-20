@@ -75,26 +75,30 @@ header{position:sticky;top:0;z-index:50;background:rgba(11,15,25,.65);backdrop-f
 .art-ring{position:absolute;inset:auto;right:10%;top:-8%;width:180px;height:180px;border-radius:50%;border:1px dashed rgba(255,255,255,.18)}
 .tools{position:absolute;bottom:10%;left:8%;display:flex;gap:.6rem}
 .tool{padding:.45rem .6rem;border:1px solid var(--card-border);border-radius:999px;background:rgba(255,255,255,.03);font-size:.9rem}
-.heading-image {
-  width: 30px;          /* Adjust size as needed */
-  height: auto;
-  margin-left: 10px;    /* Space between text and image */
-  vertical-align: middle;
-}
-
-/* Optional: For smaller screens */
-@media (max-width: 600px) {
-  h1 {
+  .heading {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
   }
 
   .heading-image {
-    margin-left: 0;
-    margin-top: 5px;     /* Space above image when stacked */
+    width: 300px;          /* Adjust size as needed */
+    height: auto;
+    margin-left: 10px;    /* Space between text and image */
   }
-}
+
+/* Optional: For smaller screens */
+  @media (max-width: 600px) {
+    .heading {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .heading-image {
+      margin-left: 0;
+      margin-top: 5px;     /* Space between text and image when stacked */
+    }
+  }
 /* Sections */
 section{padding:3.2rem 0}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.2rem}

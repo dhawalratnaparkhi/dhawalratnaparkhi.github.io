@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Banners — Dhawal Ratnaparkhi</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0f19; --panel: #12182a; --text: #e5e7eb; --muted: #94a3b8; --brand: #6ee7b7;
+  --accent: #60a5fa; --card-border: rgba(255,255,255,.06); --shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:Inter,system-ui,sans-serif;background:radial-gradient(1200px 600px at 90% -10%, rgba(96,165,250,.14), transparent 60%),radial-gradient(900px 500px at -10% 10%, rgba(110,231,183,.12), transparent 60%),var(--bg);color:var(--text);}
+a{text-decoration:none;color:inherit;}
+header{position:sticky;top:0;z-index:50;background:rgba(11,15,25,.65);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--card-border);}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:.7rem 2rem;}
+.logo{font-weight:800;display:flex;gap:.6rem;align-items:center;}
+.navlinks{display:flex;gap:.6rem;align-items:center;}
+.navlinks a{padding:.55rem .8rem;border-radius:10px;border:1px solid transparent;}
+.navlinks a:hover{border-color:var(--card-border);background:rgba(255,255,255,.03);}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.15rem;border-radius:14px;border:1px solid var(--card-border);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));color:var(--text);text-decoration:none;font-weight:600;box-shadow:var(--shadow);}
+.btn:hover{transform:translateY(-1px);box-shadow:0 14px 40px rgba(0,0,0,.45);border-color:rgba(255,255,255,.16);}
+.btn.primary{background:linear-gradient(180deg, rgba(16,185,129,.22), rgba(16,185,129,.12));border-color:rgba(16,185,129,.45);}
+main{padding:3rem 2rem;max-width:1120px;margin:0 auto;}
+footer{border-top:1px solid var(--card-border);padding:2rem;text-align:center;color:var(--muted);}
+
+.banner-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;}
+.banner-card img{width:100%;height:auto;border-radius:12px;box-shadow:var(--shadow);}
+</style>
+</head>
+<body>
+
+<header>
+<div class="nav">
+  <a class="logo" href="index.html">Dhawal • Ratnaparkhi</a>
+  <nav class="navlinks">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+    <a class="btn primary" href="https://topmate.io/dhawal_ratnaparkhi/1681170" target="_blank">Book 1:1</a>
+  </nav>
+</div>
+</header>
+
+<main>
+<h1 style="text-align:center;margin-bottom:2rem;">LinkedIn Banners</h1>
+
+<div class="banner-grid">
+  <div class="banner-card"><img src="images/banner1.jpg" alt="LinkedIn Banner 1"></div>
+  <div class="banner-card"><img src="images/banner2.jpg" alt="LinkedIn Banner 2"></div>
+  <div class="banner-card"><img src="images/banner3.jpg" alt="LinkedIn Banner 3"></div>
+  <div class="banner-card"><img src="images/banner4.jpg" alt="LinkedIn Banner 4"></div>
+  <div class="banner-card"><img src="images/banner5.jpg" alt="LinkedIn Banner 5"></div>
+  <div class="banner-card"><img src="images/banner6.jpg" alt="LinkedIn Banner 6"></div>
+</div>
+
+</main>
+
+<footer>
+© <span id="year"></span> Dhawal Ratnaparkhi. All rights reserved.
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

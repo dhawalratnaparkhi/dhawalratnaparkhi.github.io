@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,126 +11,359 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
-  
   <style>
-    /* Existing styles here (keep all of your current CSS) */
     :root {
-      --bg: #0b0f19;
-      --panel: #12182a;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --brand: #6ee7b7;
+      --bg: #0b0f19; /* deep slate */
+      --panel: #12182a; /* slightly lighter for cards */
+      --text: #e5e7eb; /* light text */
+      --muted: #94a3b8; /* muted text */
+      --brand: #6ee7b7; /* mint */
       --brand-600: #10b981;
-      --accent: #60a5fa;
+      --accent: #60a5fa; /* blue accents */
       --ring: rgba(96,165,250,.5);
       --card-border: rgba(255,255,255,.06);
       --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;font-size:16px;line-height:1.6;color:var(--text);background:var(--bg)}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 90% -10%, rgba(96,165,250,.14), transparent 60%),
+                  radial-gradient(900px 500px at -10% 10%, rgba(110,231,183,.12), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      line-height:1.6;
+    }
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
-    .container{width:min(1120px,92%);margin-inline:auto}
-    /* Add your existing CSS here... */
-    
-    /* Swiper slider styles */
-    .swiper { width: 90%; max-width: 700px; height: 400px; margin: 2rem auto; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
-    .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
+    .container{width:min(1120px, 92%);margin-inline:auto}
+    .btn{
+      display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.15rem;border-radius:14px;
+      border:1px solid var(--card-border);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);text-decoration:none;font-weight:600;box-shadow:var(--shadow);
+      transition:transform .15s ease, box-shadow .15s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover{transform:translateY(-1px);box-shadow:0 14px 40px rgba(0,0,0,.45);border-color:rgba(255,255,255,.16)}
+    .btn.primary{background:linear-gradient(180deg, rgba(16,185,129,.22), rgba(16,185,129,.12));border-color:rgba(16,185,129,.45)}
+    .btn.ghost{background:transparent}
+    .chip{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .6rem;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);font-size:.85rem}
+    .chip .dot{width:.45rem;height:.45rem;border-radius:50%;background:var(--brand)}/* Header */
+header{position:sticky;top:0;z-index:50;background:rgba(11,15,25,.65);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--card-border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:.7rem 0}
+.logo{display:flex;align-items:center;gap:.6rem;font-weight:800;letter-spacing:.3px}
+.logo-mark{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg, var(--accent), var(--brand));display:grid;place-items:center;box-shadow:var(--shadow)}
+.logo-mark svg{filter:drop-shadow(0 6px 12px rgba(0,0,0,.35))}
+.navlinks{display:flex;gap:.6rem;align-items:center}
+.navlinks a{padding:.55rem .8rem;border-radius:10px;border:1px solid transparent}
+.navlinks a:hover{border-color:var(--card-border);background:rgba(255,255,255,.03)}
+
+/* Hero */
+.hero{padding:4.5rem 0 2.5rem}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center}
+.title{font-size:clamp(2.2rem, 5vw, 3.5rem);line-height:1.1;margin:1rem 0 .75rem;font-weight:900}
+.subtitle{color:var(--muted);font-size:1.1rem;max-width:60ch}
+.kpis{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.2rem}
+.kpis .card{flex:1 1 180px;border:1px solid var(--card-border);padding:1rem 1.1rem;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));min-width:180px}
+.kpis .num{font-size:1.6rem;font-weight:800}
+.hero-art{position:relative}
+.art{aspect-ratio:4/3;border-radius:22px;background:
+  radial-gradient(200px 200px at 70% 30%, rgba(110,231,183,.16), transparent 60%),
+  radial-gradient(200px 200px at 30% 70%, rgba(96,165,250,.16), transparent 60%),
+  linear-gradient(145deg, #111729, #0b0f19);border:1px solid var(--card-border);
+  display:grid;place-items:center;overflow:hidden;box-shadow:var(--shadow)}
+.art-ring{position:absolute;inset:auto;right:10%;top:-8%;width:180px;height:180px;border-radius:50%;border:1px dashed rgba(255,255,255,.18)}
+.tools{position:absolute;bottom:10%;left:8%;display:flex;gap:.6rem}
+.tool{padding:.45rem .6rem;border:1px solid var(--card-border);border-radius:999px;background:rgba(255,255,255,.03);font-size:.9rem}
+
+/* Sections */
+section{padding:3.2rem 0}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.2rem}
+.section-head h2{margin:0;font-size:clamp(1.4rem, 3.8vw, 2rem)}
+.muted{color:var(--muted)}
+
+/* Services */
+.grid{display:grid;gap:1rem}
+.grid.cols-3{grid-template-columns:repeat(3, 1fr)}
+.card{
+  border:1px solid var(--card-border);border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  padding:1.1rem;transition:transform .15s ease, border-color .2s ease, background .2s ease;position:relative;overflow:hidden
+}
+.card:hover{transform:translateY(-2px)}
+.service-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg, rgba(96,165,250,.25), rgba(16,185,129,.2));margin-bottom:.8rem}
+
+/* Portfolio */
+.portfolio{grid-template-columns:repeat(12, 1fr)}
+.work{grid-column:span 4;border-radius:18px;overflow:hidden;border:1px solid var(--card-border);background:#0e1322}
+.work img{width:100%;height:220px;object-fit:cover}
+.work .info{padding:.9rem}
+.tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.6rem}
+.tag{font-size:.8rem;border:1px solid var(--card-border);padding:.2rem .5rem;border-radius:999px;color:var(--muted)}
+
+/* Testimonials */
+.quote{font-size:1.05rem}
+.avatar{width:42px;height:42px;border-radius:50%;background:#1f2937;border:1px solid var(--card-border)}
+
+/* Footer */
+footer{border-top:1px solid var(--card-border);padding:2rem 0;color:var(--muted)}
+.footer-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:1rem;align-items:start}
+.social{display:flex;gap:.6rem;flex-wrap:wrap}
+.social a{border:1px solid var(--card-border);padding:.5rem;border-radius:12px;display:inline-flex;align-items:center;gap:.5rem}
+
+/* Responsive */
+@media (max-width: 920px){
+  .hero-grid{grid-template-columns:1fr}
+  .grid.cols-3{grid-template-columns:1fr 1fr}
+  .portfolio .work{grid-column:span 6}
+  .footer-grid{grid-template-columns:1fr}
+}
+@media (max-width: 640px){
+  .grid.cols-3{grid-template-columns:1fr}
+  .portfolio .work{grid-column:span 12}
+}
+
   </style>
 </head>
 <body>
-  <!-- Header (keep as is) -->
+  <!-- Header -->
   <header>
     <div class="container nav">
       <a class="logo" href="#top" aria-label="Home">
         <span class="logo-mark" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 12L10 18L20 6" stroke="#071014" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
-        <span>Dhawal<span style="opacity:.6"> • Ratnaparkhi</span></span>
+        <span>Dhaval<span style="opacity:.6"> • Design</span></span>
       </a>
       <nav class="navlinks" aria-label="Primary">
         <a href="#work">Work</a>
         <a href="#services">Services</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
-        <a class="btn primary" href="https://topmate.io/dhawal_ratnaparkhi/1681170" target="_blank" rel="noopener">Book 1:1</a>
+        <a class="btn primary" href="https://topmate.io/your-topmate-username" target="_blank" rel="noopener">Book 1:1</a>
       </nav>
     </div>
-  </header>
-
-  <!-- Hero -->
-  <main id="top" class="container">
+  </header>  <!-- Hero -->  <main id="top" class="container">
     <section class="hero">
       <div class="hero-grid">
-        <!-- Existing hero content -->
-      </div>
-    </section>
-
-    <!-- Photo Slider (Swiper.js) -->
-    <section id="slider">
-      <div class="swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="image1.jpg" alt="Slide 1"></div>
-          <div class="swiper-slide"><img src="image2.jpg" alt="Slide 2"></div>
-          <div class="swiper-slide"><img src="image3.jpg" alt="Slide 3"></div>
-          <!-- Add more slides as needed -->
+        <div>
+          <span class="chip"><span class="dot"></span> Available for projects</span>
+          <h1 class="title">Graphic designer for high‑performing LinkedIn content.</h1>
+          <p class="subtitle">I design scroll‑stopping LinkedIn carousels, banners, and brand systems that look sharp and get results. Clean layouts, strong hierarchy, and consistent branding across your profile.</p>
+          <div style="display:flex; gap:.6rem; margin-top:1.2rem; flex-wrap:wrap">
+            <a class="btn primary" href="#work">See my work</a>
+            <a class="btn ghost" href="mailto:hello@example.com">Email me</a>
+          </div>
+          <div class="kpis">
+            <div class="card"><div class="num">150+ </div><div class="muted">carousels shipped</div></div>
+            <div class="card"><div class="num">75+ </div><div class="muted">brand visuals</div></div>
+            <div class="card"><div class="num">4.9★ </div><div class="muted">client rating</div></div>
+          </div>
         </div>
-        <!-- Navigation buttons -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <!-- Pagination dots -->
-        <div class="swiper-pagination"></div>
+        <div class="hero-art">
+          <div class="art">
+            <svg width="380" height="220" viewBox="0 0 380 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="20" y="20" width="340" height="180" rx="16" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+              <rect x="36" y="40" width="120" height="14" rx="7" fill="rgba(110,231,183,.45)"/>
+              <rect x="36" y="64" width="220" height="10" rx="5" fill="rgba(255,255,255,.3)"/>
+              <rect x="36" y="82" width="280" height="10" rx="5" fill="rgba(255,255,255,.16)"/>
+              <rect x="36" y="100" width="250" height="10" rx="5" fill="rgba(255,255,255,.16)"/>
+              <rect x="36" y="140" width="90" height="36" rx="10" fill="rgba(96,165,250,.35)"/>
+              <rect x="136" y="140" width="90" height="36" rx="10" fill="rgba(110,231,183,.35)"/>
+            </svg>
+          </div>
+          <div class="art-ring" aria-hidden="true"></div>
+          <div class="tools">
+            <span class="tool">Figma</span>
+            <span class="tool">Illustrator</span>
+            <span class="tool">Photoshop</span>
+          </div>
+        </div>
       </div>
-    </section>
+    </section><!-- Services -->
+<section id="services">
+  <div class="section-head">
+    <h2>Services</h2>
+    <p class="muted">Clear, consistent visuals for your LinkedIn brand.</p>
+  </div>
+  <div class="grid cols-3">
+    <div class="card">
+      <div class="service-icon">💼</div>
+      <h3>LinkedIn Banners</h3>
+      <p class="muted">Polished headers that communicate your value in seconds.</p>
+    </div>
+    <div class="card">
+      <div class="service-icon">🧩</div>
+      <h3>Carousel Design</h3>
+      <p class="muted">Readable, high‑contrast slides that drive time‑on‑post.</p>
+    </div>
+    <div class="card">
+      <div class="service-icon">🎨</div>
+      <h3>Brand Kits</h3>
+      <p class="muted">Typography, color, and reusable components for consistency.</p>
+    </div>
+  </div>
+</section>
 
-    <!-- Services -->
-    <section id="services">
-      <!-- Existing services content -->
-    </section>
+<!-- Portfolio -->
+<section id="work">
+  <div class="section-head">
+    <h2>Selected work</h2>
+    <a class="btn" href="#contact">Start a project</a>
+  </div>
+  <div class="grid portfolio">
+    <!-- Example project cards (replace images/links with your work) -->
+    <article class="work">
+      <img src="https://images.unsplash.com/photo-1529336953121-c9a052e6dfe0?q=80&w=1200&auto=format&fit=crop" alt="LinkedIn carousel project preview"/>
+      <div class="info">
+        <h3>Lead‑gen Carousel Series</h3>
+        <p class="muted">Designed a 10‑slide framework that boosted saves by 32%.</p>
+        <div class="tags"><span class="tag">Carousel</span><span class="tag">Content</span><span class="tag">LinkedIn</span></div>
+      </div>
+    </article>
+    <article class="work">
+      <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1200&auto=format&fit=crop" alt="Profile banner design"/>
+      <div class="info">
+        <h3>Personal Brand Banner</h3>
+        <p class="muted">Header system with modular badges and callouts.</p>
+        <div class="tags"><span class="tag">Banner</span><span class="tag">Branding</span></div>
+      </div>
+    </article>
+    <article class="work">
+      <img src="https://images.unsplash.com/photo-1543854611-1b9ae47b497d?q=80&w=1200&auto=format&fit=crop" alt="Brand kit mockups"/>
+      <div class="info">
+        <h3>Startup Brand Kit</h3>
+        <p class="muted">Palette, type scale, and templates for a SaaS founder.</p>
+        <div class="tags"><span class="tag">Brand Kit</span><span class="tag">Templates</span></div>
+      </div>
+    </article>
+    <article class="work">
+      <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1200&auto=format&fit=crop" alt="Carousel redesign"/>
+      <div class="info">
+        <h3>Carousel Redesign</h3>
+        <p class="muted">Improved legibility and slide‑to‑slide flow.</p>
+        <div class="tags"><span class="tag">Redesign</span><span class="tag">Accessibility</span></div>
+      </div>
+    </article>
+    <article class="work">
+      <img src="https://images.unsplash.com/photo-1529336953121-c9a052e6dfe0?q=80&w=1200&auto=format&fit=crop" alt="Branding showcase"/>
+      <div class="info">
+        <h3>Founder Brand Refresh</h3>
+        <p class="muted">Unified visuals across profile, posts, and lead magnet.</p>
+        <div class="tags"><span class="tag">Identity</span><span class="tag">System</span></div>
+      </div>
+    </article>
+    <article class="work">
+      <img src="https://images.unsplash.com/photo-1543854611-1b9ae47b497d?q=80&w=1200&auto=format&fit=crop" alt="Template pack"/>
+      <div class="info">
+        <h3>Carousel Template Pack</h3>
+        <p class="muted">Reusable Figma components for fast content production.</p>
+        <div class="tags"><span class="tag">Figma</span><span class="tag">Templates</span></div>
+      </div>
+    </article>
+  </div>
+</section>
 
-    <!-- Portfolio -->
-    <section id="work">
-      <!-- Existing portfolio content -->
-    </section>
+<!-- Testimonials -->
+<section id="testimonials">
+  <div class="section-head">
+    <h2>What clients say</h2>
+    <p class="muted">Real feedback from recent projects.</p>
+  </div>
+  <div class="grid cols-3">
+    <div class="card">
+      <p class="quote">“Our engagement jumped immediately. The carousels are crisp and easy to consume.”</p>
+      <div style="display:flex;align-items:center;gap:.7rem;margin-top:.9rem">
+        <div class="avatar"></div>
+        <div><strong>Rohit S.</strong><div class="muted">SaaS founder</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="quote">“Fast turnaround and strong sense of hierarchy. Exactly what we needed.”</p>
+      <div style="display:flex;align-items:center;gap:.7rem;margin-top:.9rem">
+        <div class="avatar"></div>
+        <div><strong>Ananya K.</strong><div class="muted">Marketing lead</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="quote">“Brand kit made our posts look consistent without slowing us down.”</p>
+      <div style="display:flex;align-items:center;gap:.7rem;margin-top:.9rem">
+        <div class="avatar"></div>
+        <div><strong>Sameer V.</strong><div class="muted">Consultant</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Testimonials -->
-    <section id="testimonials">
-      <!-- Existing testimonials content -->
-    </section>
+<!-- About -->
+<section id="about">
+  <div class="section-head">
+    <h2>About</h2>
+  </div>
+  <div class="grid" style="grid-template-columns: 1fr 1.2fr; gap: 1.2rem">
+    <div class="card">
+      <h3>Hi, I’m Dhaval.</h3>
+      <p class="muted">I help founders and creators look professional on LinkedIn. My work focuses on clarity, rhythm, and consistent brand language. I’m comfortable collaborating async or live on a call.</p>
+      <ul class="muted">
+        <li>• 4+ years designing LinkedIn visuals</li>
+        <li>• Fluent with Figma, Illustrator, Photoshop</li>
+        <li>• Templates and systems for scale</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Process</h3>
+      <ol class="muted">
+        <li><strong>Discovery:</strong> goals, audience, examples</li>
+        <li><strong>Direction:</strong> moodboard, type & color</li>
+        <li><strong>Design:</strong> first drafts, quick feedback</li>
+        <li><strong>Deliver:</strong> assets & templates</li>
+      </ol>
+      <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
+        <a class="btn primary" href="https://topmate.io/your-topmate-username" target="_blank" rel="noopener">Book a 1:1</a>
+        <a class="btn" href="#contact">Get a quote</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- About -->
-    <section id="about">
-      <!-- Existing about content -->
-    </section>
+<!-- Contact -->
+<section id="contact">
+  <div class="section-head">
+    <h2>Contact</h2>
+    <p class="muted">Pick a channel that works for you.</p>
+  </div>
+  <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1.2rem">
+    <div class="card">
+      <h3>Message me</h3>
+      <p class="muted">Use the chat bubble in the corner or email me directly.</p>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem">
+        <a class="btn" href="mailto:hello@example.com">hello@example.com</a>
+        <a class="btn" href="https://topmate.io/your-topmate-username" target="_blank" rel="noopener">Book via Topmate</a>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Social</h3>
+      <div class="social" aria-label="Social links">
+        <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener" aria-label="LinkedIn"><span>🔗</span><span>LinkedIn</span></a>
+        <a href="https://www.instagram.com/your-handle" target="_blank" rel="noopener" aria-label="Instagram"><span>📷</span><span>Instagram</span></a>
+        <a href="https://www.behance.net/your-handle" target="_blank" rel="noopener" aria-label="Behance"><span>🅱️</span><span>Behance</span></a>
+        <a href="https://dribbble.com/your-handle" target="_blank" rel="noopener" aria-label="Dribbble"><span>🏀</span><span>Dribbble</span></a>
+        <a href="https://x.com/your-handle" target="_blank" rel="noopener" aria-label="X"><span>✖️</span><span>X</span></a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Contact -->
-    <section id="contact">
-      <!-- Existing contact content -->
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <!-- Existing footer content -->
-  </footer>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-  <script>
-    const swiper = new Swiper('.swiper', {
-      loop: true,
-      autoplay: { delay: 3000 },
-      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-      pagination: { el: '.swiper-pagination', clickable: true },
-      grabCursor: true,
-    });
-
+  </main>  <footer>
+    <div class="container footer-grid">
+      <p>© <span id="year"></span> Dhaval Ratnaparkhi. All rights reserved.</p>
+      <div style="justify-self:end;display:flex;gap:.6rem;flex-wrap:wrap">
+        <a class="btn" href="/assets/Dhaval_Ratnaparkhi_Resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+        <a class="btn" href="#top">Back to top</a>
+      </div>
+    </div>
+  </footer>  <script>
     // Replace current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -143,10 +375,16 @@
         if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
       });
     });
-
-    // Crisp chat (keep as is)
-    window.$crisp=[];window.CRISP_WEBSITE_ID="CRISP_WEBSITE_ID"; 
-    (function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
-  </script>
-</body>
+  </script>  <!-- Chat to Admin (Crisp) -->  <!--
+    1) Create a free account at https://crisp.chat
+    2) In Website Settings → Setup Instructions, copy your Website ID and replace CRISP_WEBSITE_ID below.
+    3) Commit and push to GitHub Pages – the chat bubble will appear on every page.
+  -->  <script type="text/javascript"> 
+  // Replace with your Crisp website ID
+  window.$crisp=[];window.CRISP_WEBSITE_ID="CRISP_WEBSITE_ID"; 
+  (function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
+  </script>  <!-- Alternative chat providers you can swap:
+  Tidio: <script src="//code.tidio.co/your_public_key.js" async></script>
+  Drift: see https://devdocs.drift.com/docs#install-drift
+  --></body>
 </html>

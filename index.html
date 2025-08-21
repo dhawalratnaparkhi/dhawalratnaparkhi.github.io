@@ -47,7 +47,10 @@
       transition:transform .15s ease, box-shadow .15s ease, background .2s ease, border-color .2s ease;
     }
     .btn:hover{transform:translateY(-1px);box-shadow:0 14px 40px rgba(0,0,0,.45);border-color:rgba(255,255,255,.16)}
-.btn.primary{background:linear-gradient(180deg, rgba(16,185,129,.22), rgba(16,185,129,.12));border-color:rgba(16,185,129,.45)}
+..btn.primary {
+  background: linear-gradient(180deg, rgba(59,130,246,.25), rgba(59,130,246,.12)) !important;
+  border-color: rgba(59,130,246,.45) !important;
+}
     .btn.ghost{background:transparent}
     .chip{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .6rem;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);font-size:.85rem}
     .chip .dot{width:.45rem;height:.45rem;border-radius:50%;background:var(--brand)}
@@ -69,8 +72,9 @@
     .kpis .card{flex:1 1 180px;border:1px solid var(--card-border);padding:1rem 1.1rem;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));min-width:180px}
     .kpis .num{font-size:1.6rem;font-weight:800}
     .hero-art{position:relative}
-    ..art{aspect-ratio:4/3;border-radius:22px;background:linear-gradient(145deg, #111729, #0b0f19);}
-      display:grid;place-items:center;overflow:hidden;box-shadow:var(--shadow)}
+.art {
+  background: linear-gradient(145deg, #111a2c, #0a0f1c) !important;
+}
     .art-ring{position:absolute;inset:auto;right:10%;top:-8%;width:180px;height:180px;border-radius:50%;border:1px dashed rgba(255,255,255,.18)}
     .tools{position:absolute;bottom:10%;left:8%;display:flex;gap:.6rem}
     .tool{padding:.45rem .6rem;border:1px solid var(--card-border);border-radius:999px;background:rgba(255,255,255,.03);font-size:.9rem}
@@ -92,7 +96,9 @@
     .card{border:1px solid var(--card-border);border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       padding:1.1rem;transition:transform .15s ease, border-color .2s ease, background .2s ease;position:relative;overflow:hidden}
     .card:hover{transform:translateY(-2px)}
-    ..service-icon{background:linear-gradient(135deg, var(--accent), var(--brand));display:grid;place-items:center;...}
+    .service-icon {
+  background: linear-gradient(135deg, rgba(59,130,246,.25), rgba(96,165,250,.2)) !important;
+    }
     /* Portfolio */
     .portfolio{grid-template-columns:repeat(12, 1fr)}
     .work{grid-column:span 4;border-radius:18px;overflow:hidden;border:1px solid var(--card-border);background:#0e1322}

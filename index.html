@@ -127,6 +127,35 @@ header, nav {
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(59,130,246,.3);
 }
+    :root {
+  --brand: #2563eb;  /* deep blue */
+  --accent: #3b82f6; /* lighter blue */
+}
+
+body {
+  background: radial-gradient(1200px 600px at 90% -10%, rgba(59,130,246,0.15), transparent 60%),
+              radial-gradient(900px 500px at -10% 10%, rgba(37,99,235,0.12), transparent 60%),
+              var(--bg);
+}
+
+/* Make header/nav use blue-tinted glass style */
+header {
+  background: rgba(37,99,235,0.15) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(59,130,246,0.3) !important;
+}
+
+/* Button and logo tweaks */
+.logo-mark {
+  background: linear-gradient(135deg, var(--accent), var(--brand)) !important;
+}
+.btn.primary {
+  background: linear-gradient(180deg, rgba(59,130,246,0.25), rgba(59,130,246,0.12)) !important;
+  border-color: rgba(59,130,246,0.45) !important;
+}
+.prev, .next {
+  background: rgba(59,130,246,0.85) !important;
+}
   </style>
 
   <!-- Crisp Chat Script -->

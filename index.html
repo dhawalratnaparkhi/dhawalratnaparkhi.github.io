@@ -15,16 +15,16 @@
 
   <style>
     :root {
-  --bg: #0b0f19; /* deep slate */
-  --panel: #12182a; /* slightly lighter for cards */
-  --text: #e5e7eb; /* light text */
-  --muted: #94a3b8; /* muted text */
-  --brand: #6ee7b7; /* mint */
-  --brand-600: #10b981;
-  --accent: #60a5fa; /* blue accents */
-  --ring: rgba(96,165,250,.5);
-  --card-border: rgba(255,255,255,.06);
-  --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --bg: #0b0f19; /* deep slate */
+      --panel: #12182a; /* slightly lighter for cards */
+      --text: #e5e7eb; /* light text */
+      --muted: #94a3b8; /* muted text */
+      --brand: #6ee7b7; /* mint */
+      --brand-600: #10b981;
+      --accent: #60a5fa; /* blue accents */
+      --ring: rgba(96,165,250,.5);
+      --card-border: rgba(255,255,255,.06);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -47,7 +47,7 @@
       transition:transform .15s ease, box-shadow .15s ease, background .2s ease, border-color .2s ease;
     }
     .btn:hover{transform:translateY(-1px);box-shadow:0 14px 40px rgba(0,0,0,.45);border-color:rgba(255,255,255,.16)}
-.btn.primary{background:linear-gradient(180deg, rgba(59,130,246,.25), rgba(59,130,246,.12));border-color:rgba(59,130,246,.45)}
+    .btn.primary{background:linear-gradient(180deg, rgba(16,185,129,.22), rgba(16,185,129,.12));border-color:rgba(16,185,129,.45)}
     .btn.ghost{background:transparent}
     .chip{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .6rem;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);font-size:.85rem}
     .chip .dot{width:.45rem;height:.45rem;border-radius:50%;background:var(--brand)}
@@ -69,9 +69,11 @@
     .kpis .card{flex:1 1 180px;border:1px solid var(--card-border);padding:1rem 1.1rem;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));min-width:180px}
     .kpis .num{font-size:1.6rem;font-weight:800}
     .hero-art{position:relative}
-.art {
-  background: linear-gradient(145deg, #111a2c, #0a0f1c);
-}
+    .art{aspect-ratio:4/3;border-radius:22px;background:
+      radial-gradient(200px 200px at 70% 30%, rgba(110,231,183,.16), transparent 60%),
+      radial-gradient(200px 200px at 30% 70%, rgba(96,165,250,.16), transparent 60%),
+      linear-gradient(145deg, #111729, #0b0f19);border:1px solid var(--card-border);
+      display:grid;place-items:center;overflow:hidden;box-shadow:var(--shadow)}
     .art-ring{position:absolute;inset:auto;right:10%;top:-8%;width:180px;height:180px;border-radius:50%;border:1px dashed rgba(255,255,255,.18)}
     .tools{position:absolute;bottom:10%;left:8%;display:flex;gap:.6rem}
     .tool{padding:.45rem .6rem;border:1px solid var(--card-border);border-radius:999px;background:rgba(255,255,255,.03);font-size:.9rem}
@@ -93,9 +95,7 @@
     .card{border:1px solid var(--card-border);border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       padding:1.1rem;transition:transform .15s ease, border-color .2s ease, background .2s ease;position:relative;overflow:hidden}
     .card:hover{transform:translateY(-2px)}
-.service-icon {
-  background: linear-gradient(135deg, rgba(59,130,246,.25), rgba(96,165,250,.2));
-}
+    .service-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg, rgba(96,165,250,.25), rgba(16,185,129,.2));margin-bottom:.8rem}
     /* Portfolio */
     .portfolio{grid-template-columns:repeat(12, 1fr)}
     .work{grid-column:span 4;border-radius:18px;overflow:hidden;border:1px solid var(--card-border);background:#0e1322}
@@ -122,40 +122,6 @@
       .grid.cols-3{grid-template-columns:1fr}
       .portfolio .work{grid-column:span 12}
     }
-header, nav {
-  background: rgba(37,99,235,.15); /* subtle blue tint */
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(59,130,246,.3);
-}
-    :root {
-  --brand: #2563eb;  /* deep blue */
-  --accent: #3b82f6; /* lighter blue */
-}
-
-body {
-  background: radial-gradient(1200px 600px at 90% -10%, rgba(59,130,246,0.15), transparent 60%),
-              radial-gradient(900px 500px at -10% 10%, rgba(37,99,235,0.12), transparent 60%),
-              var(--bg);
-}
-
-/* Make header/nav use blue-tinted glass style */
-header {
-  background: rgba(37,99,235,0.15) !important;
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(59,130,246,0.3) !important;
-}
-
-/* Button and logo tweaks */
-.logo-mark {
-  background: linear-gradient(135deg, var(--accent), var(--brand)) !important;
-}
-.btn.primary {
-  background: linear-gradient(180deg, rgba(59,130,246,0.25), rgba(59,130,246,0.12)) !important;
-  border-color: rgba(59,130,246,0.45) !important;
-}
-.prev, .next {
-  background: rgba(59,130,246,0.85) !important;
-}
   </style>
 
   <!-- Crisp Chat Script -->
@@ -377,3 +343,4 @@ header {
   Drift: see https://devdocs.drift.com/docs#install-drift
   --></body>
 </html>
+

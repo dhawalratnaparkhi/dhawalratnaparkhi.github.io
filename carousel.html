@@ -47,21 +47,45 @@ main {padding:3rem 2rem; max-width: 1120px; margin:0 auto;}
 footer {border-top:1px solid var(--card-border); padding:2rem; text-align:center; color:var(--muted);}
 
 /* Carousel styles */
-.carousel-container {position:relative; margin:2rem auto; max-width:900px;}
+.carousel-container {
+  position: relative;
+  margin: 2rem auto;
+  max-width: 700px; /* smaller than 900px looks cleaner */
+}
 .carousel-slide {display:none; text-align:center;}
 .carousel-slide img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 80vh; /* so images never exceed 80% of screen height */
+  width: auto;
   height: auto;
   object-fit: contain;
-  border-radius:12px;
-  border:1px solid var(--card-border);
+  margin: 0 auto;
+  display: block;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
   box-shadow: var(--shadow);
 }
 .prev, .next {
-  cursor:pointer; position:absolute; top:50%; transform:translateY(-50%);
-  background: rgba(16,185,129,.8); color:#fff; padding:.6rem 1rem; border-radius:8px; font-weight:700;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(16,185,129,.8);
+  color: #fff;
+  padding: .6rem 1rem;
+  border-radius: 8px;
+  font-weight: 700;
 }
-.prev {left:0;} .next {right:0;}
+.prev { left: -50px; }  /* pull buttons slightly outside */
+.next { right: -50px; }
+  @media (max-width: 768px) {
+  .carousel-container {
+    max-width: 95%; /* almost full width on mobile */
+  }
+  .carousel-slide img {
+    max-height: 70vh;
+  }
+}
 </style>
 </head>
 <body>

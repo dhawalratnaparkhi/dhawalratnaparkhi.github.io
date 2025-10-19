@@ -295,6 +295,77 @@
       border-radius: 12px;
       border: 1px solid var(--border);
     }
+
+    /* Why Work With Me Section */
+    .why-section {
+      padding: 8rem 0;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .why-card {
+      background: var(--bg-card);
+      padding: 2.5rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .why-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .why-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent-blue);
+      box-shadow: 0 20px 60px var(--glow);
+    }
+
+    .why-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .why-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .why-card:hover .why-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .why-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .why-card p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
     /* Services Section */
     section {
       padding: 8rem 0;
@@ -732,25 +803,46 @@
     </div>
   </section>
 
-  <!-- Stats Section -->
-  <section class="stats">
+  <!-- Why Work With Me Section -->
+  <section class="why-section">
     <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number">500+</div>
-          <div class="stat-label">Designs Created</div>
+      <div class="section-header">
+        <span class="section-tag">Why Choose Me</span>
+        <h2>Why Work With Me</h2>
+        <p class="section-subtitle">
+          Fresh perspective meets dedication – I bring energy, attention to detail, and a commitment to making your brand stand out
+        </p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">⚡</div>
+          <h3>Fast Turnaround</h3>
+          <p>Quick delivery without compromising quality. Your projects get priority attention and timely completion.</p>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">150+</div>
-          <div class="stat-label">Happy Clients</div>
+        <div class="why-card">
+          <div class="why-icon">💎</div>
+          <h3>Fresh Creative Perspective</h3>
+          <p>Bringing new ideas and modern design trends to make your content stand out in crowded feeds.</p>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">98%</div>
-          <div class="stat-label">Satisfaction Rate</div>
+        <div class="why-card">
+          <div class="why-icon">🎯</div>
+          <h3>Detail-Oriented</h3>
+          <p>Meticulous attention to every element – from typography to color harmony – ensuring pixel-perfect results.</p>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">3+</div>
-          <div class="stat-label">Years Experience</div>
+        <div class="why-card">
+          <div class="why-icon">💬</div>
+          <h3>Clear Communication</h3>
+          <p>Regular updates, open feedback loops, and collaborative approach throughout the design process.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔄</div>
+          <h3>Unlimited Revisions</h3>
+          <p>Your satisfaction matters. I'll refine the design until it perfectly matches your vision.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">💰</div>
+          <h3>Affordable Pricing</h3>
+          <p>Quality design shouldn't break the bank. Competitive rates perfect for startups and growing businesses.</p>
         </div>
       </div>
     </div>
@@ -781,6 +873,11 @@
           <div class="service-icon">✨</div>
           <h3>Brand Identity</h3>
           <p>Complete visual identity systems including logos, color palettes, typography, and brand guidelines.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">👤</div>
+          <h3>Profile Revamps</h3>
+          <p>Complete LinkedIn profile makeover with cohesive banner, featured section graphics, and visual content strategy.</p>
         </div>
       </div>
     </div>

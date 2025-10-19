@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkedIn Carousels — Dhawal Ratnaparkhi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0a0e1a;
+      --bg-secondary: #0f1423;
+      --bg-card: #141b2e;
+      --accent-blue: #3b82f6;
+      --accent-blue-light: #60a5fa;
+      --accent-cyan: #06b6d4;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: rgba(59, 130, 246, 0.1);
+      --glow: rgba(59, 130, 246, 0.15);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.15), transparent),
+        radial-gradient(ellipse 60% 50% at 0% 50%, rgba(6, 182, 212, 0.1), transparent);
+      z-index: -1;
+    }
+
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(10, 14, 26, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-blue-light), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .cta-btn {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
+    }
+
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--text-primary), var(--accent-blue-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Carousel Container */
+    .carousel-section {
+      max-width: 1000px;
+      margin: 0 auto 5rem;
+      padding: 0 2rem;
+    }
+
+    .carousel-container {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .carousel-slide {
+      display: none;
+      text-align: center;
+    }
+
+    .carousel-slide.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .carousel-slide img {
+      max-width: 100%;
+      max-height: 70vh;
+      width: auto;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Carousel Controls */
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .carousel-btn {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+    }
+
+    .carousel-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .slide-counter {
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    /* Dots Indicator */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-secondary);
+      opacity: 0.3;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background: var(--accent-blue);
+      opacity: 1;
+      transform: scale(1.2);
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-container {
+        padding: 1rem 2rem;
+      }
+
+      .page-header {
+        padding: 4rem 1.5rem 3rem;
+      }
+
+      .carousel-container {
+        padding: 2rem 1.5rem;
+      }
+
+      .carousel-slide img {
+        max-height: 60vh;
+      }
+
+      .carousel-controls {
+        gap: 1rem;
+      }
+
+      .carousel-btn {
+        width: 45px;
+        height: 45px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Dhawal Ratnaparkhi</a>
+      <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <a href="https://topmate.io/dhawal_ratnaparkhi/1681170" class="cta-btn" target="_blank">Book Call</a>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>LinkedIn Carousels</h1>
+    <p>High-impact carousel designs that drive engagement and build authority</p>
+  </div>
+
+  <!-- Carousel 1 -->
+  <div class="carousel-section">
+    <div class="carousel-container" id="carousel1">
+      <div class="carousel-slide"><img src="images/image1.1.png" alt="Slide 1"></div>
+      <div class="carousel-slide"><img src="images/image1.2.png" alt="Slide 2"></div>
+      <div class="carousel-slide"><img src="images/image1.3.png" alt="Slide 3"></div>
+      <div class="carousel-slide"><img src="images/image1.4.png" alt="Slide 4"></div>
+      <div class="carousel-slide"><img src="images/image1.5.png" alt="Slide 5"></div>
+      <div class="carousel-slide"><img src="images/image1.6.png" alt="Slide 6"></div>
+      <div class="carousel-slide"><img src="images/image1.7.png" alt="Slide 7"></div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" onclick="changeSlide(-1, 'carousel1')">←</button>
+        <span class="slide-counter"><span class="current">1</span> / <span class="total">7</span></span>
+        <button class="carousel-btn" onclick="changeSlide(1, 'carousel1')">→</button>
+      </div>
+      <div class="carousel-dots"></div>
+    </div>
+  </div>
+
+  <!-- Carousel 2 -->
+  <div class="carousel-section">
+    <div class="carousel-container" id="carousel2">
+      <div class="carousel-slide"><img src="images/image2.1.jpg" alt="Slide 1"></div>
+      <div class="carousel-slide"><img src="images/image2.2.png" alt="Slide 2"></div>
+      <div class="carousel-slide"><img src="images/image2.3.png" alt="Slide 3"></div>
+      <div class="carousel-slide"><img src="images/image2.4.png" alt="Slide 4"></div>
+      <div class="carousel-slide"><img src="images/image2.5.png" alt="Slide 5"></div>
+      <div class="carousel-slide"><img src="images/image2.6.png" alt="Slide 6"></div>
+      <div class="carousel-slide"><img src="images/image2.7.png" alt="Slide 7"></div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" onclick="changeSlide(-1, 'carousel2')">←</button>
+        <span class="slide-counter"><span class="current">1</span> / <span class="total">7</span></span>
+        <button class="carousel-btn" onclick="changeSlide(1, 'carousel2')">→</button>
+      </div>
+      <div class="carousel-dots"></div>
+    </div>
+  </div>
+
+  <!-- Carousel 3 -->
+  <div class="carousel-section">
+    <div class="carousel-container" id="carousel3">
+      <div class="carousel-slide"><img src="images/image3.1.jpg" alt="Slide 1"></div>
+      <div class="carousel-slide"><img src="images/image3.2.jpg" alt="Slide 2"></div>
+      <div class="carousel-slide"><img src="images/image3.3.jpg" alt="Slide 3"></div>
+      <div class="carousel-slide"><img src="images/image3.4.jpg" alt="Slide 4"></div>
+      <div class="carousel-slide"><img src="images/image3.5.jpg" alt="Slide 5"></div>
+      <div class="carousel-slide"><img src="images/image3.6.jpg" alt="Slide 6"></div>
+      <div class="carousel-slide"><img src="images/image3.7.jpg" alt="Slide 7"></div>
+      <div class="carousel-slide"><img src="images/image3.8.jpg" alt="Slide 8"></div>
+      <div class="carousel-slide"><img src="images/image3.9.jpg" alt="Slide 9"></div>
+      <div class="carousel-slide"><img src="images/image3.10.jpg" alt="Slide 10"></div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" onclick="changeSlide(-1, 'carousel3')">←</button>
+        <span class="slide-counter"><span class="current">1</span> / <span class="total">10</span></span>
+        <button class="carousel-btn" onclick="changeSlide(1, 'carousel3')">→</button>
+      </div>
+      <div class="carousel-dots"></div>
+    </div>
+  </div>
+
+  <!-- Carousel 4 -->
+  <div class="carousel-section">
+    <div class="carousel-container" id="carousel4">
+      <div class="carousel-slide"><img src="images/carousel4-1.jpg" alt="Slide 1"></div>
+      <div class="carousel-slide"><img src="images/carousel4-2.jpg" alt="Slide 2"></div>
+      <div class="carousel-slide"><img src="images/carousel4-3.jpg" alt="Slide 3"></div>
+      <div class="carousel-slide"><img src="images/carousel4-4.jpg" alt="Slide 4"></div>
+      <div class="carousel-slide"><img src="images/carousel4-5.jpg" alt="Slide 5"></div>
+      <div class="carousel-slide"><img src="images/carousel4-6.jpg" alt="Slide 6"></div>
+      <div class="carousel-slide"><img src="images/carousel4-7.jpg" alt="Slide 7"></div>
+      <div class="carousel-slide"><img src="images/carousel4-8.jpg" alt="Slide 8"></div>
+      <div class="carousel-slide"><img src="images/carousel4-9.jpg" alt="Slide 9"></div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" onclick="changeSlide(-1, 'carousel4')">←</button>
+        <span class="slide-counter"><span class="current">1</span> / <span class="total">9</span></span>
+        <button class="carousel-btn" onclick="changeSlide(1, 'carousel4')">→</button>
+      </div>
+      <div class="carousel-dots"></div>
+    </div>
+  </div>
+
+  <!-- Carousel 5 -->
+  <div class="carousel-section">
+    <div class="carousel-container" id="carousel5">
+      <div class="carousel-slide"><img src="images/carousel5-1.jpg" alt="Slide 1"></div>
+      <div class="carousel-slide"><img src="images/carousel5-2.jpg" alt="Slide 2"></div>
+      <div class="carousel-slide"><img src="images/carousel5-3.jpg" alt="Slide 3"></div>
+      <div class="carousel-slide"><img src="images/carousel5-4.jpg" alt="Slide 4"></div>
+      <div class="carousel-slide"><img src="images/carousel5-5.jpg" alt="Slide 5"></div>
+      <div class="carousel-slide"><img src="images/carousel5-6.jpg" alt="Slide 6"></div>
+      <div class="carousel-slide"><img src="images/carousel5-7.jpg" alt="Slide 7"></div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" onclick="changeSlide(-1, 'carousel5')">←</button>
+        <span class="slide-counter"><span class="current">1</span> / <span class="total">7</span></span>
+        <button class="carousel-btn" onclick="changeSlide(1, 'carousel5')">→</button>
+      </div>
+      <div class="carousel-dots"></div>
+    </div>
+  </div>
+
+  <!-- Carousel 6 -->
+  <div class="carousel-section">
+    <div class="carousel-container" id="carousel6">
+      <div class="carousel-slide"><img src="images/carousel6-1.jpg" alt="Slide 1"></div>
+      <div class="carousel-slide"><img src="images/carousel6-2.jpg" alt="Slide 2"></div>
+      <div class="carousel-slide"><img src="images/carousel6-3.jpg" alt="Slide 3"></div>
+      <div class="carousel-slide"><img src="images/carousel6-4.jpg" alt="Slide 4"></div>
+      <div class="carousel-slide"><img src="images/carousel6-5.jpg" alt="Slide 5"></div>
+      <div class="carousel-slide"><img src="images/carousel6-6.jpg" alt="Slide 6"></div>
+      <div class="carousel-slide"><img src="images/carousel6-7.jpg" alt="Slide 7"></div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" onclick="changeSlide(-1, 'carousel6')">←</button>
+        <span class="slide-counter"><span class="current">1</span> / <span class="total">7</span></span>
+        <button class="carousel-btn" onclick="changeSlide(1, 'carousel6')">→</button>
+      </div>
+      <div class="carousel-dots"></div>
+    </div>
+  </div>
+
+  <!-- Carousel 7 -->
+  <div class="carousel-section">
+    <div class="carousel-container" id="carousel7">
+      <div class="carousel-slide"><img src="images/carousel7-1.jpg" alt="Slide 1"></div>
+      <div class="carousel-slide"><img src="images/carousel7-2.jpg" alt="Slide 2"></div>
+      <div class="carousel-slide"><img src="images/carousel7-3.jpg" alt="Slide 3"></div>
+      <div class="carousel-slide"><img src="images/carousel7-4.jpg" alt="Slide 4"></div>
+      <div class="carousel-slide"><img src="images/carousel7-5.jpg" alt="Slide 5"></div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" onclick="changeSlide(-1, 'carousel7')">←</button>
+        <span class="slide-counter"><span class="current">1</span> / <span class="total">5</span></span>
+        <button class="carousel-btn" onclick="changeSlide(1, 'carousel7')">→</button>
+      </div>
+      <div class="carousel-dots"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <span id="year"></span> Dhawal Ratnaparkhi. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const slideIndexes = {};
+
+    function initCarousel(carouselId) {
+      const container = document.getElementById(carouselId);
+      const slides = container.querySelectorAll('.carousel-slide');
+      const dotsContainer = container.querySelector('.carousel-dots');
+      
+      slideIndexes[carouselId] = 0;
+      
+      // Create dots
+      slides.forEach((_, index) => {
+        const dot = document.createElement('span');
+        dot.className = 'dot';
+        dot.onclick = () => showSlide(index, carouselId);
+        dotsContainer.appendChild(dot);
+      });
+      
+      showSlide(0, carouselId);
+    }
+
+    function showSlide(n, carouselId) {
+      const container = document.getElementById(carouselId);
+      const slides = container.querySelectorAll('.carousel-slide');
+      const dots = container.querySelectorAll('.dot');
+      const current = container.querySelector('.current');
+      
+      if (n >= slides.length) n = 0;
+      if (n < 0) n = slides.length - 1;
+      
+      slideIndexes[carouselId] = n;
+      
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+        if (index === n) slide.classList.add('active');
+      });
+      
+      dots.forEach((dot, index) => {
+        dot.classList.remove('active');
+        if (index === n) dot.classList.add('active');
+      });
+      
+      if (current) current.textContent = n + 1;
+    }
+
+    function changeSlide(direction, carouselId) {
+      showSlide(slideIndexes[carouselId] + direction, carouselId);
+    }
+
+    // Initialize all carousels
+    ['carousel1', 'carousel2', 'carousel3', 'carousel4', 'carousel5', 'carousel6', 'carousel7'].forEach(initCarousel);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        const direction = e.key === 'ArrowLeft' ? -1 : 1;
+        Object.keys(slideIndexes).forEach(id => changeSlide(direction, id));
+      }
+    });
+  </script>
+</body>
+</html>
